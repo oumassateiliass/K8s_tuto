@@ -10,3 +10,7 @@ https://cloud.google.com/sdk/docs/install?hl=fr#windows
 
 #doc swagger app
 https://github.com/lucianopereira86/NodeJS-MongoDB-Kubernetes
+
+##command to put so we can change to the project 
+
+gcloud container clusters get-credentials sofrecom --region us-east1 --project test2-161022
