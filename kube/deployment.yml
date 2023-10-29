@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+spec:
+  selector:
+    matchLabels:
+      run: php-apache
+  template:
+    metadata:
+      labels:
+        run: php-apache
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: config-app
+            # items:
+            # - key: network.propreties
+            #   path: network.propreties
+      # - name: creds-vol
+      #   secret:
+      #     secretName: creds
+      containers:
+        - name: php-apache
+          image: registry.k8s.io/hpa-example
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "10Mi"
+              cpu: "10m"
+            limits:
+              memory: "100Mi"
+              cpu: "100m"
+          envFrom:
+            - secretRef:
+                name: creds
+          volumeMounts:
+          - name: config
+            mountPath: "/my-config/php-apache"
+            readOnly: true
+          #   - name: creds-vol
+          #     readOnly: true
+          #     mountPath: "/my-secret/php-apache"

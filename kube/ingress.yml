@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /videos
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: php-apache
+                port:
+                  number: 80
+          - path: /comptas
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: php-apache
+                port:
+                  number: 80
